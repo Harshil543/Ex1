@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       <FormProvider>
+        {/* <Form /> */}
         <div className="my-4 d-flex justify-content-center align-items-center">
-          {/* <Form /> */}
           <Compform />
         </div>
       </FormProvider>

@@ -2,16 +2,23 @@ import React, { useContext } from "react";
 import { FormContext } from "./FormContext";
 import InputType from "./Inputtype";
 import Phonenumber from "./Phonenumber";
+import CheckBox from "./CheckBox";
+import Radio from "./Radio";
+import Button from "./Button";
+import Profile from "./Profile";
 
 export default function Compform() {
   const {
     name,
     email,
     phonenumber,
+    setGender,
     setName,
     setEmail,
     handleSubmit,
     handlePhonenumber,
+    handleCheckboxChange,
+    handleImageChange,
   } = useContext(FormContext);
 
   const handleChange = (setState) => (e) => {
@@ -39,9 +46,10 @@ export default function Compform() {
         required="required"
       />
       <Phonenumber value={phonenumber} onChange={handlePhonenumber} />
-      <button type="submit" className="btn btn-success">
-        submit
-      </button>
+      <CheckBox onChange={handleCheckboxChange} />
+      <Radio onChange={handleChange(setGender)} />
+      <Profile onChange={handleImageChange} />
+      <Button />
     </form>
   );
 }
