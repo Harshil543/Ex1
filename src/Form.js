@@ -17,6 +17,7 @@ export default function Form() {
     console.log(phonenumber);
     console.log(hobbie);
     console.log(gender);
+    e.target.reset();
   };
 
   const handleChange = (setState) => (e) => {
@@ -47,92 +48,118 @@ export default function Form() {
     }
   };
 
+  const handlePhonenumber = (e) => {
+    let x = e.target.value
+      .replace(/\D/g, "")
+      .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+    e.target.value = !x[2]
+      ? x[1]
+      : "+" + "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+    setPhonenumber(e.target.value);
+  };
+
   return (
-    <div className="container d-flex justify-content-center align-items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-column justify-content-center align-items-center"
-      >
-        <h1 className="text-center m-4">Profile</h1>
-        <input
-          className="form-control m-4"
-          placeholder="Name"
-          maxLength="35"
-          onChange={handleChange(setName)}
-          required
-        ></input>
-        <input
-          className="form-control m-4"
-          placeholder="Email"
-          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-          title="Invalid email address"
-          maxLength="55"
-          onChange={handleChange(setEmail)}
-          required
-        ></input>
-        <div className="container m-4 d-flex justify-content-center align-items-center">
+    <div className="my-4 d-flex justify-content-center align-items-center">
+      <form onSubmit={handleSubmit} className="bg-light p-5">
+        <h1 className="text-center my-4">Profile</h1>
+        <div class="form-group">
+          <label for="name">Name</label>
           <input
-            type="checkbox"
-            id="Swimming"
-            name="Swimming"
-            value="Swimming"
-            onChange={handleCheckboxChange}
+            className="form-control my-4"
+            placeholder="Name"
+            maxLength="35"
+            onChange={handleChange(setName)}
+            required
+          ></input>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            className="form-control my-4"
+            placeholder="Email"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            title="Invalid email address"
+            maxLength="55"
+            onChange={handleChange(setEmail)}
             required
           />
-          <label className="m-2" htmlFor="Swimming">
-            Swimming
-          </label>
-          <input
-            type="checkbox"
-            id="Driving"
-            name="Driving"
-            value="Driving"
-            onChange={handleCheckboxChange}
-          />
-          <label className="m-2" htmlFor="Driving">
-            Driving
-          </label>
-          <input
-            type="checkbox"
-            id="Cycling"
-            name="Cycling"
-            value="Cycling"
-            onChange={handleCheckboxChange}
-          />
-          <label className="m-2" htmlFor="Cycling">
-            Cycling
-          </label>
         </div>
-        <div className="container m-4 d-flex justify-content-center align-items-center">
+        <div class="form-group">
           <input
-            type="radio"
-            id="male"
-            name="gender"
-            value="male"
-            onChange={handleChange(setGender)}
-          />
-          <label htmlFor="male" className="m-2">
-            Male
-          </label>
-          <input
-            type="radio"
-            id="female"
-            name="gender"
-            value="female"
-            onChange={handleChange(setGender)}
-          />
-          <label htmlFor="female" className="m-2">
-            Female
-          </label>
+            className="form-control my-4"
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+(xxx) xxx-xxxx"
+            onChange={handlePhonenumber}
+            required
+          ></input>
         </div>
-        <textarea
-          placeholder="About me"
-          className="form-control m-4"
-          maxLength="500"
-          onChange={handleChange(setAboutme)}
-        ></textarea>
+        <div class="form-group">
+          <label for="hobbie">Hobbie</label>
+          <div className="my-4">
+            <input
+              type="checkbox"
+              id="Swimming"
+              name="Swimming"
+              value="Swimming"
+              onChange={handleCheckboxChange}
+              required
+            />
+            <label className="m-2" htmlFor="Swimming">
+              Swimming
+            </label>
+            <input
+              type="checkbox"
+              id="Driving"
+              name="Driving"
+              value="Driving"
+              onChange={handleCheckboxChange}
+            />
+            <label className="m-2" htmlFor="Driving">
+              Driving
+            </label>
+            <input
+              type="checkbox"
+              id="Cycling"
+              name="Cycling"
+              value="Cycling"
+              onChange={handleCheckboxChange}
+            />
+            <label className="m-2" htmlFor="Cycling">
+              Cycling
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <div className="my-4">
+            <input
+              type="radio"
+              id="male"
+              name="gender"
+              value="male"
+              onChange={handleChange(setGender)}
+            />
+            <label htmlFor="male" className="m-2">
+              Male
+            </label>
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="female"
+              onChange={handleChange(setGender)}
+            />
+            <label htmlFor="female" className="m-2">
+              Female
+            </label>
+          </div>
+        </div>
         <div className="form-group">
-          <label htmlFor="image">Upload Image</label>
+          <label htmlFor="image" className="mx-4">
+            Upload Image
+          </label>
           <input
             type="file"
             id="image"
@@ -141,7 +168,7 @@ export default function Form() {
           />
         </div>
         {image && (
-          <div className="form-group">
+          <div className="form-group mt-4">
             <img
               className="rounded-circle"
               src={image}
@@ -150,16 +177,17 @@ export default function Form() {
             />
           </div>
         )}
-        <input
-          className="form-control m-4"
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="123-45-678"
-          pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-          onChange={handleChange(setPhonenumber)}
-          required
-        ></input>
+        <div className="form-group">
+          <label for="gender" className="mt-4">
+            About me
+          </label>
+          <textarea
+            placeholder="About me"
+            className="form-control my-4"
+            maxLength="500"
+            onChange={handleChange(setAboutme)}
+          ></textarea>
+        </div>
         <button type="submit" className="btn btn-success mb-5">
           submit
         </button>
