@@ -28,7 +28,7 @@ export default function Compform() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="col-3">
+    <form onSubmit={handleSubmit} className="col-4 p-4 bg-light">
       <h1>Profile</h1>
       <InputType
         label="Name"

@@ -1,5 +1,5 @@
 import "./App.css";
-// import Form from "./Form";
+import Form from "./Form";
 import Compform from "./componant/Compform";
 import { FormProvider } from "./componant/FormContext";
 
