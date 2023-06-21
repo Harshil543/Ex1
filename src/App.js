@@ -1,11 +1,18 @@
 import "./App.css";
-import Form from "./Form";
+// import Form from "./Form";
+import Compform from "./componant/Compform";
+import { FormProvider } from "./componant/FormContext";
 
 function App() {
   return (
-    <div>
-      <Form />
-    </div>
+    <>
+      <FormProvider>
+        <div className="my-4 d-flex justify-content-center align-items-center">
+          {/* <Form /> */}
+          <Compform />
+        </div>
+      </FormProvider>
+    </>
   );
 }
 

@@ -18,6 +18,19 @@ export default function Form() {
     console.log(hobbie);
     console.log(gender);
     e.target.reset();
+
+    if (
+      !name ||
+      !email ||
+      !hobbie.length ||
+      !gender ||
+      !aboutme ||
+      !phonenumber
+    ) {
+      console.log("Please fill in all the fields");
+      return;
+    }
+    setImage(null);
   };
 
   const handleChange = (setState) => (e) => {
@@ -62,8 +75,8 @@ export default function Form() {
     <div className="my-4 d-flex justify-content-center align-items-center">
       <form onSubmit={handleSubmit} className="bg-light p-5">
         <h1 className="text-center my-4">Profile</h1>
-        <div class="form-group">
-          <label for="name">Name</label>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
           <input
             className="form-control my-4"
             placeholder="Name"
@@ -72,8 +85,8 @@ export default function Form() {
             required
           ></input>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
           <input
             className="form-control my-4"
             placeholder="Email"
@@ -84,20 +97,24 @@ export default function Form() {
             required
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
+          <label htmlFor="phone">Phone Number (US format)</label>
           <input
-            className="form-control my-4"
+            className="form-control mt-4"
             type="tel"
             id="phone"
             name="phone"
             placeholder="+(xxx) xxx-xxxx"
             onChange={handlePhonenumber}
             required
-          ></input>
+          />
+          <small className="form-text text-muted">
+            Format: +(123) 456-7890
+          </small>
         </div>
-        <div class="form-group">
-          <label for="hobbie">Hobbie</label>
-          <div className="my-4">
+        <div className="form-group mt-4">
+          <label htmlFor="hobbie">Hobbie</label>
+          <div className="mt-4">
             <input
               type="checkbox"
               id="Swimming"
@@ -131,9 +148,9 @@ export default function Form() {
             </label>
           </div>
         </div>
-        <div class="form-group">
-          <label for="gender">Gender</label>
-          <div className="my-4">
+        <div className="form-group mt-4">
+          <label htmlFor="gender">Gender</label>
+          <div className="mt-4">
             <input
               type="radio"
               id="male"
@@ -157,15 +174,17 @@ export default function Form() {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="image" className="mx-4">
+          <label htmlFor="image" className="my-4">
             Upload Image
           </label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
+          <div className="form-group">
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
         </div>
         {image && (
           <div className="form-group mt-4">
@@ -178,7 +197,7 @@ export default function Form() {
           </div>
         )}
         <div className="form-group">
-          <label for="gender" className="mt-4">
+          <label htmlFor="gender" className="mt-4">
             About me
           </label>
           <textarea
@@ -188,7 +207,46 @@ export default function Form() {
             onChange={handleChange(setAboutme)}
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-success mb-5">
+        <button
+          type="submit"
+          className="btn btn-success mx-5"
+          disabled={
+            !name ||
+            !email ||
+            !hobbie.length ||
+            !gender ||
+            !aboutme ||
+            !phonenumber
+          }
+        >
+          submit
+        </button>
+        <button
+          type="submit"
+          className="btn btn-outline-success mx-5"
+          disabled={
+            !name ||
+            !email ||
+            !hobbie.length ||
+            !gender ||
+            !aboutme ||
+            !phonenumber
+          }
+        >
+          submit
+        </button>
+        <button
+          type="submit"
+          className="btn btn-link mx-5 text-decoration-none text-dark"
+          disabled={
+            !name ||
+            !email ||
+            !hobbie.length ||
+            !gender ||
+            !aboutme ||
+            !phonenumber
+          }
+        >
           submit
         </button>
       </form>
