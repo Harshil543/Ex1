@@ -9,6 +9,7 @@ export const FormProvider = ({ children }) => {
   const [hobbie, setHobbie] = useState([]);
   const [gender, setGender] = useState("");
   const [image, setImage] = useState("");
+  const [aboutme, setAboutme] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ export const FormProvider = ({ children }) => {
     console.log(phonenumber);
     console.log(hobbie);
     console.log(gender);
+    console.log(aboutme);
     e.target.reset();
     setImage(null);
   };
@@ -59,6 +61,8 @@ export const FormProvider = ({ children }) => {
     phonenumber,
     gender,
     image,
+    aboutme,
+    setAboutme,
     setImage,
     setGender,
     setName,

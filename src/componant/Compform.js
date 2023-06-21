@@ -6,12 +6,14 @@ import CheckBox from "./CheckBox";
 import Radio from "./Radio";
 import Button from "./Button";
 import Profile from "./Profile";
+import About from "./About";
 
 export default function Compform() {
   const {
     name,
     email,
     phonenumber,
+    setAboutme,
     setGender,
     setName,
     setEmail,
@@ -47,6 +49,7 @@ export default function Compform() {
       />
       <Phonenumber value={phonenumber} onChange={handlePhonenumber} />
       <CheckBox onChange={handleCheckboxChange} />
+      <About onChange={handleChange(setAboutme)} />
       <Radio onChange={handleChange(setGender)} />
       <Profile onChange={handleImageChange} />
       <Button />
