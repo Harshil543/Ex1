@@ -19,17 +19,6 @@ export default function Form() {
     console.log(gender);
     e.target.reset();
 
-    if (
-      !name ||
-      !email ||
-      !hobbie.length ||
-      !gender ||
-      !aboutme ||
-      !phonenumber
-    ) {
-      console.log("Please fill in all the fields");
-      return;
-    }
     setImage(null);
   };
 

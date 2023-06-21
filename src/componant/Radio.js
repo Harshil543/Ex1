@@ -2,8 +2,8 @@ import React from "react";
 
 function Radio({ onChange }) {
   return (
-    <div className="col-3">
-      <label>Gender :</label>
+    <div className="my-3 col-2 d-flex">
+      <label className="mx-3">Gender</label>
       <div className="form-check">
         <input
           className="form-check-input"
@@ -14,7 +14,7 @@ function Radio({ onChange }) {
           required
           onChange={onChange}
         />
-        <label className="form-check-label" htmlFor="male">
+        <label className="form-check-label mx-3" htmlFor="male">
           Male
         </label>
       </div>
