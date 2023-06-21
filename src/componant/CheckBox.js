@@ -1,42 +1,20 @@
 import React from "react";
 
-export default function CheckBox({ onChange }) {
+export default function CheckBox(props) {
   return (
-    <div className="form-group mt-4">
-      <label htmlFor="hobbie">Hobbie</label>
-      <div className="mt-4">
+    <>
+      <div key={props.key} className="form-group">
         <input
           type="checkbox"
-          id="Swimming"
-          name="Swimming"
-          value="Swimming"
-          onChange={onChange}
-          required
+          id={props.id}
+          name={props.name}
+          value={props.value}
+          onChange={props.onChange}
         />
-        <label className="m-2" htmlFor="Swimming">
-          Swimming
-        </label>
-        <input
-          type="checkbox"
-          id="Driving"
-          name="Driving"
-          value="Driving"
-          onChange={onChange}
-        />
-        <label className="m-2" htmlFor="Driving">
-          Driving
-        </label>
-        <input
-          type="checkbox"
-          id="Cycling"
-          name="Cycling"
-          value="Cycling"
-          onChange={onChange}
-        />
-        <label className="m-2" htmlFor="Cycling">
-          Cycling
+        <label className="mx-2" htmlFor={props.id}>
+          {props.name}
         </label>
       </div>
-    </div>
+    </>
   );
 }

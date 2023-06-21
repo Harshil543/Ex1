@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { InputMask } from "primereact/inputmask";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -64,6 +67,7 @@ export default function Form() {
   return (
     <div className="my-4 d-flex justify-content-center align-items-center">
       <form onSubmit={handleSubmit} className="bg-light p-5">
+        {/* <span>{phonenumber.trim()}</span> */}
         <h1 className="text-center my-4">Profile</h1>
         <div className="form-group">
           <label htmlFor="name">Name</label>

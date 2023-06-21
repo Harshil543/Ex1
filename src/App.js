@@ -1,6 +1,6 @@
 import "./App.css";
-import Form from "./Form";
-import Compform from "./componant/Compform";
+// import Form from "./Form";
+import FormComponent from "./componant/FormComponent";
 import { FormProvider } from "./componant/FormContext";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <FormProvider>
         {/* <Form /> */}
         <div className="my-4 d-flex justify-content-center align-items-center">
-          <Compform />
+          <FormComponent />
         </div>
       </FormProvider>
     </>

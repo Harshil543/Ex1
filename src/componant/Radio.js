@@ -1,39 +1,48 @@
+// import React from "react";
+
+// export default function Radio(props) {
+//   const genderlist = [
+//     { id: "M", name: "Male", value: "MALE" },
+//     { id: "F", name: "Female", value: "FEMALE" },
+//   ];
+//   return (
+//     <>
+//       <label className="my-3">{props.label}</label>
+//       {genderlist.map((gender) => {
+//         return (
+//           <div key={gender.id} className="form-group">
+//             <input
+//               type="radio"
+//               id={gender.id}
+//               name="gender"
+//               value={gender.value}
+//               onChange={props.onChange}
+//               required
+//             />
+//             <label htmlFor={gender.id}>{gender.name}</label>
+//           </div>
+//         );
+//       })}
+//     </>
+//   );
+// }
+
 import React from "react";
 
-function Radio({ onChange }) {
+export default function Radio(props) {
   return (
-    <div className="my-3 col-2 d-flex">
-      <label className="mx-3">Gender</label>
-      <div className="form-check">
+    <>
+      <div key={props.id} className="form-group">
         <input
-          className="form-check-input"
           type="radio"
+          id={props.id}
           name="gender"
-          id="male"
-          value="Male"
+          value={props.value}
+          onChange={props.onChange}
           required
-          onChange={onChange}
         />
-        <label className="form-check-label mx-3" htmlFor="male">
-          Male
-        </label>
+        <label htmlFor={props.id}>{props.name}</label>
       </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="gender"
-          id="female"
-          value="Female"
-          required
-          onChange={onChange}
-        />
-        <label className="form-check-label" htmlFor="female">
-          Female
-        </label>
-      </div>
-    </div>
+    </>
   );
 }
-
-export default Radio;
