@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import photo from "./profile.JPG";
 
 export const FormContext = createContext();
 
@@ -8,19 +9,46 @@ export const FormProvider = ({ children }) => {
   const [phonenumber, setPhonenumber] = useState("");
   const [hobbie, setHobbie] = useState([]);
   const [gender, setGender] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(photo);
   const [aboutme, setAboutme] = useState("");
+  const [password, setPassword] = useState("");
+
+  const hobbielist = [
+    {
+      id: 1,
+      name: "Swimming",
+      value: "SWIM",
+    },
+    {
+      id: 2,
+      name: "Driving",
+      value: "DRIVING",
+    },
+    {
+      id: 3,
+      name: "cycling",
+      value: "cycling",
+    },
+  ];
+
+  const genderlist = [
+    { id: "M", name: "Male", value: "MALE" },
+    { id: "F", name: "Female", value: "FEMALE" },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let phoneNumber = phonenumber.replace(/[\s()+-]/g, "");
+
     console.log(name);
     console.log(email);
-    console.log(phonenumber);
+    console.log(password);
+    console.log(phoneNumber);
     console.log(hobbie);
     console.log(gender);
     console.log(aboutme);
     e.target.reset();
-    setImage(null);
+    setImage(photo);
   };
 
   const handlePhonenumber = (e) => {
@@ -56,6 +84,10 @@ export const FormProvider = ({ children }) => {
     }
   };
 
+  const handleChange = (setState) => (e) => {
+    setState(e.target.value);
+  };
+
   const contextValue = {
     name,
     email,
@@ -63,6 +95,8 @@ export const FormProvider = ({ children }) => {
     gender,
     image,
     aboutme,
+    password,
+    setPassword,
     setAboutme,
     setImage,
     setGender,
@@ -73,6 +107,9 @@ export const FormProvider = ({ children }) => {
     handlePhonenumber,
     handleCheckboxChange,
     handleImageChange,
+    handleChange,
+    hobbielist,
+    genderlist,
   };
 
   return (

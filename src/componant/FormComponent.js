@@ -5,37 +5,16 @@ import Phonenumber from "./Phonenumber";
 import CheckBox from "./CheckBox";
 import Radio from "./Radio";
 import Button from "./Button";
-// import Profile from "./Profile";
+import Profile from "./Profile";
 import About from "./About";
 
 export default function FormComponent() {
-  const hobbielist = [
-    {
-      id: 1,
-      name: "Swimming",
-      value: "SWIM",
-    },
-    {
-      id: 2,
-      name: "Driving",
-      value: "DRIVING",
-    },
-    {
-      id: 3,
-      name: "cycling",
-      value: "cycling",
-    },
-  ];
-
-  const genderlist = [
-    { id: "M", name: "Male", value: "MALE" },
-    { id: "F", name: "Female", value: "FEMALE" },
-  ];
-
   const {
     name,
     email,
     phonenumber,
+    password,
+    setPassword,
     setAboutme,
     setGender,
     setName,
@@ -43,17 +22,20 @@ export default function FormComponent() {
     handleSubmit,
     handlePhonenumber,
     handleCheckboxChange,
-    // handleImageChange,
+    handleImageChange,
+    handleChange,
+    genderlist,
+    hobbielist,
   } = useContext(FormContext);
 
-  const handleChange = (setState) => (e) => {
-    setState(e.target.value);
-  };
-
   return (
-    <div className="col-4 p-4 bg-light">
+    <form onSubmit={handleSubmit} className="col-4 p-4 bg-light">
       <h1>Profile</h1>
+      <div className="d-flex flex-column justify-contant-center align-items-center">
+        <Profile onChange={handleImageChange} />
+      </div>
       <InputType
+        type="text"
         label="Name"
         placeholder="Name"
         maxLength="35"
@@ -62,12 +44,21 @@ export default function FormComponent() {
         required="required"
       />
       <InputType
+        type="text"
         label="Email"
         placeholder="Email"
         maxLength="55"
         pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
         value={email}
         onChange={handleChange(setEmail)}
+        required="required"
+      />
+      <InputType
+        type="password"
+        label="password"
+        placeholder="Password"
+        value={password}
+        onChange={handleChange(setPassword)}
         required="required"
       />
       <Phonenumber value={phonenumber} onChange={handlePhonenumber} />
@@ -101,10 +92,7 @@ export default function FormComponent() {
           </div>
         );
       })}
-      {/* <Profile onChange={handleImageChange} /> */}
-      <Button onClick={handleSubmit} type="dark" />
-      {/* <Button type="outline-dark" /> */}
-      {/* <Button type="link text-decoration-none text-dark" /> */}
-    </div>
+      <Button type="dark" />
+    </form>
   );
 }

@@ -5,6 +5,7 @@ export default function Inputtype(props) {
     <div className="form-group">
       <label htmlFor={props.label}>{props.label}</label>
       <input
+        // type={props.type}
         className="form-control my-4"
         id={props.label}
         placeholder={props.placeholder}

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Profile.css";
 import { FormContext } from "./FormContext";
 
-const Profile = ({ onChange }) => {
+const Profile = (props) => {
   const { image } = useContext(FormContext);
 
   return (
@@ -12,19 +12,22 @@ const Profile = ({ onChange }) => {
           Upload Image
         </label>
         <div className="form-group">
-          <input type="file" id="image" accept="image/*" onChange={onChange} />
-        </div>
-      </div>
-      {image && (
-        <div className="form-group mt-4">
-          <img
-            className="rounded-circle"
-            src={image}
-            alt="Preview"
-            style={{ width: "150px", height: "150px", objectFit: "cover" }}
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            onChange={props.onChange}
           />
         </div>
-      )}
+      </div>
+      <div className="form-group mt-4">
+        <img
+          className="rounded-circle"
+          src={image}
+          alt="Preview"
+          style={{ width: "150px", height: "150px", objectFit: "cover" }}
+        />
+      </div>
     </>
   );
 };
