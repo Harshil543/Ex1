@@ -1,17 +1,125 @@
-import { createContext, useState } from "react";
+// import { createContext, useState } from "react";
+// import photo from "./profile.JPG";
+// import { useFormik } from "formik";
+
+// export const FormContext = createContext();
+
+// export const FormProvider = ({ children }) => {
+//   const [image, setImage] = useState(photo);
+
+//   const initialValues = {
+//     name: "",
+//   };
+
+//   const handlePhonenumber = (e) => {
+//     let x = e.target.value
+//       .replace(/\D/g, "")
+//       .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+//     e.target.value = !x[2]
+//       ? x[1] // eslint-disable-next-line
+//       : "+" + "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+//     setPhonenumber(e.target.value);
+//   };
+
+//   const handleCheckboxChange = (e) => {
+//     const { value, checked } = e.target;
+//     if (checked) {
+//       setHobbie((preHobbie) => [...preHobbie, value]);
+//     } else {
+//       setHobbie((preHobbie) => preHobbie.filter((hobbie) => hobbie !== value));
+//     }
+//   };
+
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = () => {
+//         setImage(reader.result);
+//       };
+//       reader.readAsDataURL(file);
+//     } else {
+//       setImage(null);
+//     }
+//   };
+
+//   const formik = useFormik({
+//     initialValues,
+//     onSubmit: (values, actions) => {
+//       console.log(values);
+//       actions.resetForm();
+//       setImage(photo);
+//     },
+//   });
+
+//   const contextValue = {
+//     formik,
+//     handlePhonenumber,
+//     handleCheckboxChange,
+//     handleImageChange,
+//     hobbielist,
+//     genderlist,
+//   };
+
+//   return (
+//     <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
+//   );
+// };
+
+// import React, { createContext } from "react";
+// import { useFormik } from "formik";
+
+// const initialValues = {
+//   name: "",
+//   email: "",
+//   aboutme: "",
+//   gender: "",
+// };
+// const handleCheckboxChange = (e) => {
+//   const { value, checked } = e.target;
+//   if (checked) {
+//     setHobbie((preHobbie) => [...preHobbie, value]);
+//   } else {
+//     setHobbie((preHobbie) => preHobbie.filter((hobbie) => hobbie !== value));
+//   }
+// };
+// const FormContext = createContext(null);
+
+// export const FormProvider = ({ children }) => {
+//   const formik = useFormik({
+//     initialValues,
+//     onSubmit: (values, { resetForm }, e) => {
+//       console.log(values);
+//       resetForm();
+//     },
+//   });
+
+//   return <FormContext.Provider value={formik}>{children}</FormContext.Provider>;
+// };
+
+// export default FormContext;
+
+import React, { createContext, useState } from "react";
+import { useFormik } from "formik";
 import photo from "./profile.JPG";
 
-export const FormContext = createContext();
+const initialValues = {
+  profile: photo,
+  name: "",
+  email: "",
+  phonenumber: "",
+  aboutme: "",
+  gender: "",
+  hobbies: [],
+};
+
+const FormContext = createContext(null);
 
 export const FormProvider = ({ children }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [hobbie, setHobbie] = useState([]);
-  const [gender, setGender] = useState("");
-  const [image, setImage] = useState(photo);
-  const [aboutme, setAboutme] = useState("");
-  const [password, setPassword] = useState("");
+  const genderlist = [
+    { id: "M", name: "Male", value: "MALE" },
+    { id: "F", name: "Female", value: "FEMALE" },
+  ];
 
   const hobbielist = [
     {
@@ -26,50 +134,12 @@ export const FormProvider = ({ children }) => {
     },
     {
       id: 3,
-      name: "cycling",
-      value: "cycling",
+      name: "Cycling",
+      value: "CYCLING",
     },
   ];
 
-  const genderlist = [
-    { id: "M", name: "Male", value: "MALE" },
-    { id: "F", name: "Female", value: "FEMALE" },
-  ];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let phoneNumber = phonenumber.replace(/[\s()+-]/g, "");
-
-    console.log(name);
-    console.log(email);
-    console.log(password);
-    console.log(phoneNumber);
-    console.log(hobbie);
-    console.log(gender);
-    console.log(aboutme);
-    e.target.reset();
-    setImage(photo);
-  };
-
-  const handlePhonenumber = (e) => {
-    let x = e.target.value
-      .replace(/\D/g, "")
-      .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-    e.target.value = !x[2]
-      ? x[1]
-      : // eslint-disable-next-line
-        "+" + "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-    setPhonenumber(e.target.value);
-  };
-
-  const handleCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setHobbie((preHobbie) => [...preHobbie, value]);
-    } else {
-      setHobbie((preHobbie) => preHobbie.filter((hobbie) => hobbie !== value));
-    }
-  };
+  const [image, setImage] = useState(photo);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -80,39 +150,35 @@ export const FormProvider = ({ children }) => {
       };
       reader.readAsDataURL(file);
     } else {
-      setImage(null);
+      setImage(photo);
     }
+
+    formik.setFieldValue("profile", file);
   };
 
-  const handleChange = (setState) => (e) => {
-    setState(e.target.value);
-  };
-
-  const contextValue = {
-    name,
-    email,
-    phonenumber,
-    gender,
-    image,
-    aboutme,
-    password,
-    setPassword,
-    setAboutme,
-    setImage,
-    setGender,
-    setName,
-    setEmail,
-    setPhonenumber,
-    handleSubmit,
-    handlePhonenumber,
-    handleCheckboxChange,
-    handleImageChange,
-    handleChange,
-    hobbielist,
-    genderlist,
-  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+      setImage(photo);
+    },
+  });
 
   return (
-    <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
+    <FormContext.Provider
+      value={{
+        formik,
+        hobbielist,
+        genderlist,
+        image,
+        setImage,
+        handleImageChange,
+      }}
+    >
+      {children}
+    </FormContext.Provider>
   );
 };
+
+export default FormContext;

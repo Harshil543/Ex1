@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import FormContext from "./FormContext";
 
-function Phonenumber({ onChange }) {
+const PhoneNumber = ({ name, onChange }) => {
+  const formctx = useContext(FormContext);
+
   return (
-    <div className="form-group">
-      <label htmlFor="phone">Phone Number (US format)</label>
+    <div>
+      <label htmlFor={name}>Phone Number:</label>
       <input
-        className="form-control mt-4"
-        type="tel"
-        id="phone"
-        name="phone"
-        placeholder="+(xxx) xxx-xxxx"
-        onChange={onChange}
-        required
+        type="text"
+        id={name}
+        name={name}
+        value={formctx.formik.values.phonenumber}
+        onChange={(e) => {
+          let x = e.target.value
+            .replace(/\D/g, "")
+            .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+          x = !x[2]
+            ? x[1]
+            : // eslint-disable-next-line
+              "+" + "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+
+          formctx.formik.setFieldValue("phonenumber", x);
+        }}
       />
-      <small className="form-text text-muted">Format: +(123) 456-7890</small>
     </div>
   );
-}
+};
 
-export default Phonenumber;
+export default PhoneNumber;

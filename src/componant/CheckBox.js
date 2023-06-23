@@ -1,20 +1,18 @@
 import React from "react";
 
-export default function CheckBox(props) {
+const CheckBox = ({ name, value, checked, onChange, label }) => {
   return (
-    <>
-      <div key={props.key} className="form-group">
-        <input
-          type="checkbox"
-          id={props.id}
-          name={props.name}
-          value={props.value}
-          onChange={props.onChange}
-        />
-        <label className="mx-2" htmlFor={props.id}>
-          {props.name}
-        </label>
-      </div>
-    </>
+    <div>
+      <input
+        type="checkbox"
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={onChange}
+      />
+      <label>{label}</label>
+    </div>
   );
-}
+};
+
+export default CheckBox;
