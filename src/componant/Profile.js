@@ -1,47 +1,55 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Profile.css";
 import FormContext from "./FormContext";
 
-const Profile = () => {
+const Profile = (props) => {
   const formctx = useContext(FormContext);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        formctx.setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      formctx.setImage(null);
-    }
-    formctx.formik.setFieldValue("profile", file);
+  const openImageInPreview = () => {
+    setShowPreview(true);
+  };
+
+  const closePreview = () => {
+    setShowPreview(false);
   };
 
   return (
     <>
-      <div className="form-group">
-        <label htmlFor="image" className="my-4">
-          Upload Image
-        </label>
-        <div className="form-group">
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
+      <div className="profile">
+        <div
+          className="profile-pic-div"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <img
+            src={formctx.image}
+            id="photo"
+            alt="Profile"
+            onClick={openImageInPreview}
+            style={{ objectFit: "cover" }}
           />
+          {isHovered && (
+            <>
+              <input
+                type="file"
+                id="file"
+                onChange={formctx.handleImageChange}
+                accept="image/*"
+              />
+              <label htmlFor="file" id="uploadBtn">
+                Choose Photo
+              </label>
+            </>
+          )}
         </div>
       </div>
-      <div className="form-group mt-4">
-        <img
-          className="rounded-circle"
-          src={formctx.image}
-          alt="Preview"
-          style={{ width: "150px", height: "150px", objectFit: "cover" }}
-        />
-      </div>
+      {showPreview && (
+        <div className="image-preview-overlay" onClick={closePreview}>
+          <img src={formctx.image} alt="Preview" className="preview-image" />
+        </div>
+      )}
     </>
   );
 };

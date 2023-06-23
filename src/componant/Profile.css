@@ -1,0 +1,47 @@
+.profile {
+  text-align: center;
+}
+
+.profile-pic-div {
+  height: 150px;
+  width: 150px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgb(247, 248, 247);
+}
+
+.profile-pic-div:hover,
+.profile-pic-div:focus {
+  border-color: #eeeaea;
+  background-color: #f5f5f5;
+}
+
+#photo {
+  height: 100%;
+  width: 100%;
+}
+
+#file {
+  display: none;
+}
+
+#uploadBtn {
+  height: 30px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+  line-height: 40px;
+  font-family: sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
