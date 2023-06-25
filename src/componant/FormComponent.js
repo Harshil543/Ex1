@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import FormContext from "./FormContext";
 import InputType from "./Inputtype";
 import Radio from "./Radio";
 import CheckBox from "./CheckBox";
-// import PhoneNumber from "./Phonenumber";
 import About from "./About";
 import Profile from "./Profile";
+import Button from "./Button";
+import PasswordInputType from "./PasswordInputType";
 
 const FormComponent = () => {
   const formctx = useContext(FormContext);
@@ -15,12 +16,13 @@ const FormComponent = () => {
   };
 
   return (
-    <div className="col-4 p-4 bg-light">
+    <div className="px-5 pt-2 m-3 shadow-lg bg-light rounded">
       <h1 className="text-center">Profile</h1>
       <div className="d-flex flex-column justify-contant-center align-items-center">
         <Profile name="image" />
       </div>
       <InputType
+        type="text"
         onChange={formctx.formik.handleChange}
         value={formctx.formik.values.name}
         label="Name"
@@ -29,13 +31,13 @@ const FormComponent = () => {
         placeholder="Name"
       />
       <InputType
+        type="text"
         onChange={formctx.formik.handleChange}
         value={formctx.formik.values.email}
         label="Email"
         maxLength="55"
         placeholder="email"
         name="email"
-        type="email"
       />
       <InputType
         onChange={formctx.handlePhonenumber}
@@ -44,32 +46,39 @@ const FormComponent = () => {
         placeholder="Phone Number"
         name="phonenumber"
       />
-      <label className="my-3">Gender</label>
-      {formctx.genderlist.map((gender) => {
-        return (
-          <div key={gender.id}>
-            <Radio id={gender.id} value={gender.value} name={gender.name} />
-          </div>
-        );
-      })}
-
-      <label className="my-3">Hobbie</label>
-      {formctx.hobbielist.map((hobby) => (
-        <CheckBox
-          key={hobby.id}
-          id={hobby.id}
-          name="hobbies"
-          value={hobby.value}
-          checked={formctx.formik.values.hobbies.includes(hobby.value)}
-          onChange={formctx.formik.handleChange}
-          label={hobby.name}
-        />
-      ))}
-
+      <PasswordInputType
+        onChange={formctx.formik.handleChange}
+        value={formctx.formik.values.password}
+        label="Password"
+        placeholder="Password"
+        name="password"
+      />
+      <div className="d-flex justify-cantent-center align-items-center">
+        <label className="">Gender</label>
+        {formctx.genderlist.map((gender) => {
+          return (
+            <div key={gender.id}>
+              <Radio id={gender.id} value={gender.value} name={gender.name} />
+            </div>
+          );
+        })}
+      </div>
+      <div className="d-flex justify-cantent-center align-items-center">
+        <div className="me-4">Hobbie</div>
+        {formctx.hobbielist.map((hobby) => (
+          <CheckBox
+            key={hobby.id}
+            id={hobby.id}
+            name="hobbies"
+            value={hobby.value}
+            checked={formctx.formik.values.hobbies.includes(hobby.value)}
+            onChange={formctx.formik.handleChange}
+            label={hobby.name}
+          />
+        ))}
+      </div>
       <About placeholder="About me" name="aboutme" />
-      <button onClick={handleClick} type="submit">
-        Submit
-      </button>
+      <Button onClick={handleClick} label="submit" type="outline-dark" />
     </div>
   );
 };

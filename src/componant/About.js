@@ -6,10 +6,10 @@ export default function About({ name, placeholder }) {
 
   return (
     <div className="form-group">
-      <label className="mt-4">About me</label>
+      <label className="mt-3 mb-1">About me</label>
       <textarea
         placeholder={placeholder}
-        className="form-control my-4"
+        className="form-control"
         name={name}
         maxLength="500"
         value={formctx.formik.values.aboutme}

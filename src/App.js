@@ -8,7 +8,10 @@ function App() {
     <>
       <FormProvider>
         {/* <Form /> */}
-        <div className="my-4 d-flex justify-content-center align-items-center">
+        <div
+          style={{ backgroundColor: "#0A6EBD" }}
+          className="d-flex justify-content-center"
+        >
           <FormComponent />
         </div>
       </FormProvider>

@@ -2,9 +2,10 @@ import React from "react";
 
 const CheckBox = ({ name, value, checked, onChange, label, id }) => {
   return (
-    <div>
-      <div className="form-group">
+    <>
+      <div className="form-check d-flex justify-cantent-center align-items-center">
         <input
+          className=" form-check-input"
           type="checkbox"
           id={id}
           name={name}
@@ -12,11 +13,11 @@ const CheckBox = ({ name, value, checked, onChange, label, id }) => {
           checked={checked}
           onChange={onChange}
         />
-        <label className="mx-2" htmlFor={id}>
+        <label className=" form-check-label mx-2" htmlFor={id}>
           {label}
         </label>
       </div>
-    </div>
+    </>
   );
 };
 

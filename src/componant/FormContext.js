@@ -1,12 +1,13 @@
 import React, { createContext, useState } from "react";
 import { useFormik } from "formik";
-import photo from "./profile.JPG";
+import photo from "./pro2.jpg";
 
 const initialValues = {
   profile: photo,
   name: "",
   email: "",
   phonenumber: "",
+  password: "",
   aboutme: "",
   gender: "",
   hobbies: [],
@@ -49,6 +50,7 @@ export const FormProvider = ({ children }) => {
 
     formik.setFieldValue("phonenumber", x);
   };
+
   const [image, setImage] = useState(photo);
 
   const handleImageChange = (e) => {
@@ -65,7 +67,7 @@ export const FormProvider = ({ children }) => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values, { resetForm }, e) => {
       console.log(values);
       resetForm();
       setImage(photo);

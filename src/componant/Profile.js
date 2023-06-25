@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Profile.css";
 import FormContext from "./FormContext";
 
-const Profile = (props) => {
+const Profile = () => {
   const formctx = useContext(FormContext);
   const [isHovered, setIsHovered] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -39,7 +39,7 @@ const Profile = (props) => {
                 accept="image/*"
               />
               <label htmlFor="file" id="uploadBtn">
-                Choose Photo
+                upload
               </label>
             </>
           )}

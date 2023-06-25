@@ -1,24 +1,19 @@
 import React from "react";
 
-const InputType = ({
-  onChange,
-  maxLength,
-  placeholder,
-  label,
-  name,
-  value,
-}) => {
+const InputType = (props) => {
   return (
     <div>
-      <label htmlFor={label}>{label}</label>
+      <label htmlFor={props.label} className="mt-3 mb-1">
+        {props.label}
+      </label>
       <input
-        type="text"
-        className="form-control my-4"
-        id={name}
-        value={value}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        onChange={onChange}
+        type={props.type}
+        className={`form-control ${props.className}`}
+        id={props.name}
+        value={props.value}
+        placeholder={props.placeholder}
+        maxLength={props.maxLength}
+        onChange={props.onChange}
         required
       />
     </div>
