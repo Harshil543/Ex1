@@ -30,20 +30,26 @@ const Profile = () => {
             onClick={openImageInPreview}
             style={{ objectFit: "cover" }}
           />
+          <input
+            type="file"
+            id="file"
+            onChange={formctx.handleImageChange}
+            accept="image/*"
+          />
           {isHovered && (
-            <>
-              <input
-                type="file"
-                id="file"
-                onChange={formctx.handleImageChange}
-                accept="image/*"
-              />
-              <label htmlFor="file" id="uploadBtn">
-                upload
-              </label>
-            </>
+            <label htmlFor="file" id="uploadBtn">
+              upload
+            </label>
           )}
         </div>
+        <button
+          className="btn btn-link text-dark text-decoration-none"
+          onClick={() => {
+            formctx.setImage(formctx.formik.values.profile);
+          }}
+        >
+          Remove
+        </button>
       </div>
       {showPreview && (
         <div className="image-preview-overlay" onClick={closePreview}>

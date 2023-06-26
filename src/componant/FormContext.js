@@ -59,14 +59,46 @@ export const FormProvider = ({ children }) => {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
-        formik.setFieldValue("profile", file);
       };
       reader.readAsDataURL(file);
+    } else {
+      setImage(photo);
     }
   };
 
   const formik = useFormik({
     initialValues,
+    validate: (values) => {
+      let errors = {};
+      const passwordRegex =
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+      if (!values.name) {
+        errors.name = "Required";
+      }
+
+      if (!values.email) {
+        errors.email = "Required";
+      } else if (
+        !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
+          values.email
+        )
+      ) {
+        errors.email = "Invalid email address";
+      }
+
+      if (!values.phonenumber) {
+        errors.phonenumber = "Required";
+      }
+
+      if (!values.password) {
+        errors.password = "Required";
+      } else if (!passwordRegex.test(values.password)) {
+        errors.password = "Invalid Password.";
+      }
+
+      return errors;
+    },
     onSubmit: (values, { resetForm }, e) => {
       console.log(values);
       resetForm();
@@ -92,104 +124,3 @@ export const FormProvider = ({ children }) => {
 };
 
 export default FormContext;
-
-// import { createContext, useState } from "react";
-// import photo from "./profile.JPG";
-// import { useFormik } from "formik";
-
-// export const FormContext = createContext();
-
-// export const FormProvider = ({ children }) => {
-//   const [image, setImage] = useState(photo);
-
-//   const initialValues = {
-//     name: "",
-//   };
-
-//   const handlePhonenumber = (e) => {
-//     let x = e.target.value
-//       .replace(/\D/g, "")
-//       .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-//     e.target.value = !x[2]
-//       ? x[1] // eslint-disable-next-line
-//       : "+" + "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-//     setPhonenumber(e.target.value);
-//   };
-
-//   const handleCheckboxChange = (e) => {
-//     const { value, checked } = e.target;
-//     if (checked) {
-//       setHobbie((preHobbie) => [...preHobbie, value]);
-//     } else {
-//       setHobbie((preHobbie) => preHobbie.filter((hobbie) => hobbie !== value));
-//     }
-//   };
-
-//   const handleImageChange = (e) => {
-//     const file = e.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onload = () => {
-//         setImage(reader.result);
-//       };
-//       reader.readAsDataURL(file);
-//     } else {
-//       setImage(null);
-//     }
-//   };
-
-//   const formik = useFormik({
-//     initialValues,
-//     onSubmit: (values, actions) => {
-//       console.log(values);
-//       actions.resetForm();
-//       setImage(photo);
-//     },
-//   });
-
-//   const contextValue = {
-//     formik,
-//     handlePhonenumber,
-//     handleCheckboxChange,
-//     handleImageChange,
-//     hobbielist,
-//     genderlist,
-//   };
-
-//   return (
-//     <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
-//   );
-// };
-
-// import React, { createContext } from "react";
-// import { useFormik } from "formik";
-
-// const initialValues = {
-//   name: "",
-//   email: "",
-//   aboutme: "",
-//   gender: "",
-// };
-// const handleCheckboxChange = (e) => {
-//   const { value, checked } = e.target;
-//   if (checked) {
-//     setHobbie((preHobbie) => [...preHobbie, value]);
-//   } else {
-//     setHobbie((preHobbie) => preHobbie.filter((hobbie) => hobbie !== value));
-//   }
-// };
-// const FormContext = createContext(null);
-
-// export const FormProvider = ({ children }) => {
-//   const formik = useFormik({
-//     initialValues,
-//     onSubmit: (values, { resetForm }, e) => {
-//       console.log(values);
-//       resetForm();
-//     },
-//   });
-
-//   return <FormContext.Provider value={formik}>{children}</FormContext.Provider>;
-// };
-
-// export default FormContext;
