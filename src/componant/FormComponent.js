@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import FormContext from "./FormContext";
 import InputType from "./Inputtype";
 import Radio from "./Radio";
@@ -7,6 +7,7 @@ import About from "./About";
 import Profile from "./Profile";
 import Button from "./Button";
 import PasswordInputType from "./PasswordInputType";
+// import PhoneNumber from "./Phonenumber";
 
 const FormComponent = () => {
   const formctx = useContext(FormContext);

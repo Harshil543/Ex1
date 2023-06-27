@@ -100,6 +100,7 @@ export const FormProvider = ({ children }) => {
       return errors;
     },
     onSubmit: (values, { resetForm }, e) => {
+      // let phoneNumber = values.phonenumber.replace(/[\s()+-]/g, "");
       console.log(values);
       resetForm();
       setImage(photo);

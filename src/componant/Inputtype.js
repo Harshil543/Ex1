@@ -12,7 +12,7 @@ const InputType = (props) => {
         type={props.type}
         className={`form-control ${props.className}`}
         id={props.name}
-        value={props.value[props.name]}
+        value={props.value}
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         onChange={props.onChange}
